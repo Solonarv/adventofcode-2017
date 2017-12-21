@@ -1,0 +1,3 @@
+foo (0) -> bar
+bar (0) -> baz
+baz (0) -> quux
