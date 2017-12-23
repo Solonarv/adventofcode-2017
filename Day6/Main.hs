@@ -1,15 +1,18 @@
-#!/bin/env stack
--- stack runghc --package vector --package containers
 {-# LANGUAGE TupleSections, ViewPatterns #-}
+{-# LANGUAGE DataKinds, FlexibleInstances, TypeFamilies #-}
+module Day6.Main where
 
 import Data.Vector (Vector, (!), (//))
 import qualified Data.Vector as V
 import qualified Data.Map.Strict as M
 
-getInput :: IO (Vector Int)
-getInput = V.fromList . map read . words . head . lines <$> readFile "input.txt"
+import Harness
 
-main = getInput >>= print . findCycle stepMemoryBanks
+instance Solution 6 where
+    type Input 6 = Vector Int
+    type Output 6 = Cycle
+    readInput = simpleReadInput $ V.fromList . map read . words . head . lines
+    process _ = findCycle stepMemoryBanks
 
 stepMemoryBanks :: Vector Int -> Vector Int
 stepMemoryBanks vec = newBank

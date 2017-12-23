@@ -1,14 +1,18 @@
-#!/bin/env stack
--- stack runghc
+{-# LANGUAGE DataKinds, FlexibleInstances, TypeFamilies #-}
+module Day4.Main where
 
 import qualified Data.Set as S
 import Data.List (foldl')
 import Data.Maybe
 
-main = countValid <$> getInput >>= print
+import Harness
 
-getInput :: IO [[String]]
-getInput = map words . lines <$> readFile "input.txt"
+instance Solution 4 where
+    type Input 4 = [[String]]
+    type Output 4 = Int
+    readInput = simpleReadInput $ map words . lines
+    process _ = countValid
+
 
 countValid :: Ord a => [[a]] -> Int
 countValid = countTrues . map isValid

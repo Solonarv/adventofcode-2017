@@ -5,8 +5,8 @@
     ViewPatterns,
     FlexibleContexts
     #-}
-module Tree (
-    module Tree,
+module Day7.Tree (
+    module Day7.Tree,
     unfix
     ) where
 

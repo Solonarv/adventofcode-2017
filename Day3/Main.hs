@@ -1,11 +1,15 @@
-#!/bin/env stack
--- stack runghc
+{-# LANGUAGE DataKinds, FlexibleInstances, TypeFamilies #-}
+module Day3.Main where
 
 import Control.Monad (join)
 import Control.Arrow ((&&&))
 
-getInput :: IO Int
-getInput = read <$> readFile "input.txt"
+import Harness
+
+instance Solution 3 where
+    type Input 3 = Int
+    type Output 3 = Int
+    process _ = stepsToCenter
 
 findLayer :: Int -> Int
 findLayer n = (`quot` 2) . subtract 1 . fst . head $ dropWhile ((< n) . snd) oddSquares
